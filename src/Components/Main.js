@@ -1,14 +1,33 @@
-import { Component } from 'react'
-import HornedBeast from './HornedBeast'
+import { Component } from "react";
+import list from '../data.json';
+import HornedBeast from './HornedBeast.js';
+
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 class Main extends Component {
+    constructor() {
+        super();
+        this.state = {
+            beastList: list,
+        }
+    }
     render() {
         return (
-            <main>
-                <HornedBeast title="Colorado Pronghorn" imgURL="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Antilocapra_americana.jpg/440px-Antilocapra_americana.jpg" description="Colorado Pronghorn!" />
-                <HornedBeast title="Colorado Bighorn Sheep" imgURL="https://statesymbolsusa.org/sites/statesymbolsusa.org/files/BighornSheep_ownby1.jpg" description="Looks like a ram, but is actually a Colorado Bighorn Sheep!" />
-            </main>
-        )
+            <Container fluid>
+                <Row xs={1} sm={2}md={3} lg={4} xl={5}>
+                    {this.state.beastList.map(element =>
+                        <Col>
+                            <HornedBeast
+                                title={element.title}
+                                image_url={element.image_url}
+                                description={element.description} />
+                        </Col>
+                    )}
+                </Row>
+            </Container>
+        );
     }
 }
 
